@@ -1,6 +1,5 @@
 <?php
-//session_start();
-
+session_start();
 ?>
 <html lang="es">
 <!-- Mirrored from demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Mar 2017 21:29:18 GMT -->
@@ -60,15 +59,21 @@
                 </div>
                 <ul class="nav">
                     <li class="">
-                        <a href="home2-user.php">
+                        <a href="home2admin.php">
                             <i class="material-icons">dashboard</i>
                             <p>Inicio</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="nueva_solicitud-user.php">
+                    <li class="">
+                        <a href="nueva_solicitud2admin.php">
                             <i class="material-icons">add</i>
                             <p>Nueva Solicitud</p>
+                        </a>
+                    </li>
+                      <li class="active">
+                        <a href="nueva_solicitud2admin.php">
+                            <i class="material-icons">check_circle</i>
+                            <p>Ver Solicitud</p>
                         </a>
                     </li>
                     <li class="">
@@ -96,13 +101,24 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <p class="navbar-brand" href="#"> Nueva Solicitud </p>
+                        <p class="navbar-brand" href="#"> Solicitud Pendiente </p>
                     </div>
                 </div>
             </nav>
             <div class="content">
                 <div class="container-fluid" style="background: #B00234;">
-                    <form name="registro_solicitud" id="registro_solicitud" action="php/registro_solicitud.php" method="POST" enctype="multipart/form-data">
+
+<?php    include "conexion.php";
+$id = intval($_GET['id']);
+            $sql = mysqli_query($conn, "SELECT * FROM orden_pedido  WHERE id='$id'");
+                        if(mysqli_num_rows($sql) == 0){
+                header("Location: index.php");
+            }else{
+                $row = mysqli_fetch_assoc($sql);
+            }
+            ?>
+
+                    <form name="revision_solicitud" id="revision_solicitud" action="php/revision_solicitud.php" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card">
@@ -113,7 +129,7 @@
                                         <h4 class="card-title">Fecha de Solicitud</h4>
                                         <div class="form-group">
                                             <label class="label-control" style="color: transparent;">.</label>
-                                            <input type="text" id="fecha_hoy" name="fecha_hoy" class="form-control datepicker" value="<?php echo date(" d-m-y"); ?>" readonly />
+                                            <input type="text" id="fecha_hoy" name="fecha_hoy" class="form-control datetimepicker" value="<?php echo $row['fecha_solicitud']; ?>" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +143,7 @@
                                         <h4 class="card-title">Fecha de Entrega</h4>
                                         <div class="form-group">
                                             <label class="label-control">Seleccione la fecha de entrega</label>
-                                            <input type="text" id="fecha_entrega" name="fecha_entrega" class="form-control datepicker" value="<?php echo date(" d-m-y"); ?>" />
+                                            <input type="text" id="fecha_entrega" name="fecha_entrega" class="form-control datepicker" value="<?php echo $row['fecha_entrega']; ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +157,7 @@
                                         <h4 class="card-title">Nombre</h4>
                                         <div class="form-group">
                                             <label class="label-control">Escriba el nombre: </label>
-                                            <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Juan Perez">
+                                            <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" value="<?php echo $row['nombre_cliente']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +184,7 @@
                   while ($row = $result->fetch_array())
                   {
                   ?>
-                                                <option value="<?php echo $row['id']; ?>">
+                                                <option value="<?php echo $row['id']; ?>" <?php if($row['sabor']== $row['sabor'] ) echo "selected"; ?>>
                                                     <?php echo $row['sabor']; ?>
                                                 </option>
                                                 <?php
@@ -199,7 +215,7 @@
                   while ($row = $result->fetch_array())
                   {
                   ?>
-                                                <option value="<?php echo $row['id']; ?>">
+                                                <option value="<?php echo $row['id']; ?>" <?php if($row['medida_tamano']== $row['medida_tamano'] ) echo "selected"; ?> >
                                                     <?php echo $row['medida']; ?>
                                                 </option>
                                                 <?php
@@ -210,6 +226,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php    include "conexion.php";
+$id = intval($_GET['id']);
+            $sql = mysqli_query($conn, "SELECT * FROM orden_pedido  WHERE id='$id'");
+                        if(mysqli_num_rows($sql) == 0){
+                header("Location: index.php");
+            }else{
+                $row = mysqli_fetch_assoc($sql);
+            }
+            ?>
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-header card-header-icon" data-background-color="red">
@@ -218,7 +243,7 @@
                                     <div class="card-content">
                                         <h4 class="card-title">Observaciones</h4>
                                         <div class="form-group">
-                                            <textarea class="form-control" id="observaciones" cols="50" rows="3"></textarea>
+                                        <textarea class="form-control" id="observaciones" cols="50" rows="3" ><?php echo $row['observaciones']; ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +258,7 @@
                                     <div class="card-content">
                                         <h4 class="card-title">Numero de Personas</h4>
                                         <div class="form-group">
-                                            <input type="number" class="form-control" id="no_personas" name="no_personas" placeholder="0">
+                                            <input type="number" class="form-control" id="no_personas" name="no_personas" placeholder="0" value="<?php echo $row['no_personas']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -246,27 +271,14 @@
                                     <div class="card-content">
                                         <h4 class="card-title">Diseño</h4>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="diseno" name="diseno" placeholder="Hello Kitty , Globos , flores , etc...">
+                                            <input type="text" class="form-control" id="diseno" name="diseno" value="<?php echo $row['diseno']; ?>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <legend style="color: white;">Regular Image</legend>
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="assets/img/image_placeholder.jpg" alt="...">
-                                                </div>
-                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                        <div>
-                                            <span class="btn btn-warning btn-round btn-file">
-                                                        <span class="fileinput-new">Select image</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" id="imagen" name="imagen" />
-                                            </span>
-                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                        </div>
-                                    </div>
+                                <legend style="color: white;">Imagen de Referencia</legend>
+                                <img src="php/img_ordenes/<?php echo $row['url']; ?>" style="width: 300px;">
                                 </div>
                             </div>
                             <hr style="color: white;">

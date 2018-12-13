@@ -24,7 +24,7 @@ $columns = array(
 );
 
 // getting total number records without any search
-$sql = "SELECT a.id , a.fecha_solicitud , a.fecha_entrega , b.sabor, a.diseno  ";
+$sql = "SELECT a.id , a.fecha_solicitud , a.fecha_entrega , b.sabor, a.diseno, a.nombre_cliente  ";
 $sql.=" FROM orden_pedido a LEFT JOIN sabores b on b.id = a.sabor WHERE a.estatus_pedido = 1 ";
 $query=mysqli_query($conn, $sql) or die("por_pagar-ajax-data.php: get InventoryItems");
 $totalData = mysqli_num_rows($query);
@@ -33,7 +33,7 @@ $totalFiltered = $totalData;  // when there is no search parameter then total nu
 
 if( !empty($requestData['search']['value']) ) {
 	// if there is a search parameter
-	$sql = "SELECT a.id , a.fecha_solicitud , a.fecha_entrega , b.sabor , a.diseno  ";
+	$sql = "SELECT a.id , a.fecha_solicitud , a.fecha_entrega , b.sabor , a.diseno , a.nombre_cliente  ";
 	$sql.=" FROM orden_pedido a LEFT JOIN sabores b on b.id = a.sabor WHERE a.estatus_pedido = 1 ";
 	$sql.=" WHERE id_cliente LIKE '".$requestData['search']['value']."%' ";
 	$sql.=" WHERE id LIKE '".$requestData['search']['value']."%' ";    // $requestData['search']['value'] contains search parameter
@@ -46,7 +46,7 @@ if( !empty($requestData['search']['value']) ) {
 	
 } else {	
 
-	$sql = "SELECT a.id , a.fecha_solicitud , a.fecha_entrega , b.sabor, a.diseno ";
+	$sql = "SELECT a.id , a.fecha_solicitud , a.fecha_entrega , b.sabor, a.diseno, a.nombre_cliente ";
 	$sql.=" FROM orden_pedido a LEFT JOIN sabores b on b.id = a.sabor WHERE a.estatus_pedido = 1 ";
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 	$query=mysqli_query($conn, $sql) or die("por_pagar-ajax-data.php: get PO");
@@ -57,7 +57,7 @@ $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
-	$nestedData[] =  '<button type="button" title="Ver Solicitud" class="btn btn-info" data-toggle="modal" data-id="'.$row['id'].'" data-target="#ModalDinamico">'.$row['id'].'</button>';
+	$nestedData[] =  '<a href="verSolicitud.php?id='.$row['id'].'" title="Ver Solicitud" class="btn btn-info">'.$row["id"].'</a>';
     $nestedData[] = $row["nombre_cliente"];
     $nestedData[] = $row["fecha_solicitud"];
     $nestedData[] = $row["fecha_entrega"];

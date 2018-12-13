@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 
 ?>
 <html lang="en">
@@ -84,19 +84,19 @@
                 </div>
                 <ul class="nav">
                     <li class="active">
-                        <a href="home2-user.php">
+                        <a href="home2admin.php">
                             <i class="material-icons">dashboard</i>
                             <p>Inicio</p>
                         </a>
                     </li>
                     <li class="">
-                        <a href="nueva_solicitud-user.php">
+                        <a href="nueva_solicitud2admin.php">
                             <i class="material-icons">add</i>
                             <p>Nueva Solicitud</p>
                         </a>
                     </li>
                     <li class="">
-                        <a href="nueva_solicitud-user.php">
+                        <a href="nueva_solicitud2dmin.php">
                             <i class="material-icons">history</i>
                             <p>Historial de Solicitudes</p>
                         </a>
@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-icon" data-background-color="red">
@@ -210,26 +210,7 @@
                                 </div>
                             </div>
                     </div>
-                    <!-- Modal -->
-<div class="modal fade" id="ModalDinamico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+                
                 </div>
             </div>
              <footer class="footer">
@@ -345,10 +326,10 @@ $(document).ready(function() {
                 } );
             } );
 
-    function  showCreateThanksYouForm (id) {
-    var id = id;
-    $('#ModalDinamico').modal('show')
-}
+
+
+
+
 </script>
 <!-- Mirrored from demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Mar 2017 21:32:16 GMT -->
 
