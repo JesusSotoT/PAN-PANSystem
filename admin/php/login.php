@@ -17,7 +17,7 @@ if(!empty($_POST)){
 			}else{
 				session_start();
 				$_SESSION["user_id"]=$user_id;
-				print "<script>window.location='../home2-user.php';</script>";				
+				print "<script>window.location='../home2admin.php';</script>";				
 			}
 		}
 	}

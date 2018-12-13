@@ -57,7 +57,7 @@ $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData=array(); 
 
-	$nestedData[] = $row["id"];
+	$nestedData[] =  '<button type="button" title="Ver Solicitud" class="btn btn-info" data-toggle="modal" data-id="'.$row['id'].'" data-target="#ModalDinamico">'.$row['id'].'</button>';
     $nestedData[] = $row["nombre_cliente"];
     $nestedData[] = $row["fecha_solicitud"];
     $nestedData[] = $row["fecha_entrega"];

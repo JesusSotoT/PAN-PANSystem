@@ -210,6 +210,26 @@ session_start();
                                 </div>
                             </div>
                     </div>
+                    <!-- Modal -->
+<div class="modal fade" id="ModalDinamico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
                 </div>
             </div>
              <footer class="footer">
@@ -276,6 +296,8 @@ $(document).ready(function() {
     demo.initDashboardPageCharts();
 
     demo.initVectorMap();
+
+
 });
 
                   $(document).ready(function() {
@@ -322,6 +344,11 @@ $(document).ready(function() {
                     }
                 } );
             } );
+
+    function  showCreateThanksYouForm (id) {
+    var id = id;
+    $('#ModalDinamico').modal('show')
+}
 </script>
 <!-- Mirrored from demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Mar 2017 21:32:16 GMT -->
 
