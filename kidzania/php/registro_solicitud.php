@@ -53,5 +53,5 @@ if(isset($_POST['registro'])){
 						}
 				
 			}
-header("Location: ../home2-user.php");
+header("Location: ../registro_solicitud.php");
  ?>

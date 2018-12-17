@@ -278,6 +278,7 @@
                                 <div class="col-md-4"></div>
                                 <button type="button" href="home2-user.php" class="btn btn-danger col-md-2"> Cancelar</button>
                             </div>
+                        </div>
                     </form>
                 </div>
                 <footer class="footer">
